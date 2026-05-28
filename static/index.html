@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101820">
+    <title>Work Time | Elite Puma</title>
+    <link rel="stylesheet" href="/assets/styles.css?v=6">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow">time.elitepuma.ru</p>
+            <h1>Рабочее время</h1>
+          </div>
+          <div id="status" class="status">загрузка</div>
+        </div>
+
+        <div class="active">
+          <span>Текущая сессия</span>
+          <strong id="currentTimer">00:00:00</strong>
+          <p id="currentNote">Нет активной работы</p>
+        </div>
+
+        <div class="controls">
+          <input id="noteInput" type="text" maxlength="80" placeholder="Заметка к сессии">
+          <button id="startBtn" type="button">Старт</button>
+          <button id="stopBtn" type="button">Стоп</button>
+        </div>
+      </section>
+
+      <section class="summary" aria-label="Итоги">
+        <article>
+          <span>Сегодня</span>
+          <strong id="todayTotal">00:00</strong>
+        </article>
+        <article>
+          <span>Неделя</span>
+          <strong id="weekTotal">00:00</strong>
+        </article>
+        <article>
+          <span>Месяц</span>
+          <strong id="monthTotal">00:00</strong>
+        </article>
+        <article>
+          <span>Всего</span>
+          <strong id="allTotal">00:00</strong>
+        </article>
+      </section>
+
+      <section class="calendar" aria-label="Календарь">
+        <div class="section-head">
+          <h2 id="calendarTitle">Календарь</h2>
+          <div class="calendar-controls">
+            <button id="prevMonthBtn" type="button" aria-label="Предыдущий месяц">‹</button>
+            <button id="todayMonthBtn" type="button">Сегодня</button>
+            <button id="nextMonthBtn" type="button" aria-label="Следующий месяц">›</button>
+          </div>
+        </div>
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span>Пн</span>
+          <span>Вт</span>
+          <span>Ср</span>
+          <span>Чт</span>
+          <span>Пт</span>
+          <span>Сб</span>
+          <span>Вс</span>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </section>
+
+      <section class="history">
+        <div class="section-head">
+          <h2 id="sessionsTitle">Сессии</h2>
+          <button id="refreshBtn" type="button">Обновить</button>
+        </div>
+        <div id="sessions" class="sessions"></div>
+      </section>
+    </main>
+
+    <script src="/assets/app.js?v=6"></script>
+  </body>
+</html>
