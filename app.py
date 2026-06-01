@@ -136,8 +136,8 @@ def index(x_remote_user: Optional[str] = Header(None)):
     html = (BASE_DIR / "static" / "index.html").read_text(encoding="utf-8")
     initial_state = json.dumps(summarize(load_data(x_remote_user)), ensure_ascii=False)
     return html.replace(
-        '<script src="/assets/app.js?v=6"></script>',
-        f'<script>window.__INITIAL_STATE__ = {initial_state};</script>\n    <script src="/assets/app.js?v=6"></script>',
+        '<script src="/assets/app.js?v=9"></script>',
+        f'<script>window.__INITIAL_STATE__ = {initial_state};</script>\n    <script src="/assets/app.js?v=9"></script>',
     )
 
 
@@ -191,6 +191,26 @@ def update_session(session_id: int, req: SessionUpdateRequest, x_remote_user: Op
     session["start"] = iso(start_dt)
     session["end"] = iso(end_dt) if end_dt else None
     session["note"] = (req.note or "").strip()
+    save_data(data, x_remote_user)
+    return summarize(data)
+
+
+@app.delete("/api/session/{session_id}")
+def delete_session(session_id: int, x_remote_user: Optional[str] = Header(None)):
+    return remove_session(session_id, x_remote_user)
+
+
+@app.post("/api/session/{session_id}/delete")
+def delete_session_post(session_id: int, x_remote_user: Optional[str] = Header(None)):
+    return remove_session(session_id, x_remote_user)
+
+
+def remove_session(session_id: int, x_remote_user: Optional[str] = None):
+    data = load_data(x_remote_user)
+    if session_id < 0 or session_id >= len(data["sessions"]):
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    data["sessions"].pop(session_id)
     save_data(data, x_remote_user)
     return summarize(data)
 

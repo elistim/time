@@ -309,14 +309,26 @@ button:disabled {
   color: var(--muted);
 }
 
+.session-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
 .session-edit,
+.session-delete,
 .session-form .secondary {
   min-height: 32px;
-  margin-top: 8px;
   padding: 0 12px;
   background: rgba(255, 255, 255, 0.1);
   color: var(--text);
   font-size: 0.85rem;
+}
+
+.session-delete {
+  background: rgba(239, 111, 108, 0.18);
+  color: #ffd8d7;
 }
 
 .session.editing {
@@ -411,6 +423,10 @@ button:disabled {
 
   .session > div:last-child {
     text-align: left;
+  }
+
+  .session-actions {
+    justify-content: flex-start;
   }
 
   .session-form {

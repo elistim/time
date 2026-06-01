@@ -148,7 +148,30 @@ function renderSessions() {
       editingSessionId = session.id;
       render();
     });
-    right.append(duration, range, editButton);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "session-delete";
+    deleteButton.type = "button";
+    deleteButton.textContent = "Удалить сессию";
+    deleteButton.addEventListener("click", async () => {
+      if (!confirm("Удалить эту сессию?")) {
+        return;
+      }
+
+      if (editingSessionId === session.id) {
+        editingSessionId = null;
+      }
+
+      try {
+        await request(`/api/session/${session.id}/delete`, { method: "POST" });
+      } catch (error) {
+        alert(`Не удалось удалить сессию: ${error.message}`);
+      }
+    });
+    const actions = document.createElement("div");
+    actions.className = "session-actions";
+    actions.append(editButton, deleteButton);
+    right.append(duration, range, actions);
 
     row.append(left, right);
     return row;
@@ -184,7 +207,7 @@ function renderSessionEditor(session) {
   noteLabel.textContent = "Заметка";
   const noteInputEl = document.createElement("input");
   noteInputEl.type = "text";
-  noteInputEl.maxLength = 80;
+  noteInputEl.maxLength = 300;
   noteInputEl.value = session.note || "";
   noteLabel.append(noteInputEl);
 
