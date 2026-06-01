@@ -50,6 +50,23 @@ uvicorn app:app --host 0.0.0.0 --port 8000
 http://localhost:8000
 ```
 
+## Версии
+
+Текущие версии софта на сервере:
+
+| Компонент | Версия |
+| --- | --- |
+| Python | 3.8.10 |
+| FastAPI | 0.124.4 |
+| Uvicorn | 0.33.0 |
+| Pydantic | 2.10.6 |
+| Starlette | 0.44.0 |
+| AnyIO | 4.5.2 |
+| nginx | 1.18.0 (Ubuntu) |
+| systemd | 245 (245.4-4ubuntu3.24) |
+
+Сейчас systemd-сервис `time.service` запускает приложение через `/opt/brosil/venv/bin/uvicorn`. Поэтому версии Python-пакетов выше сняты из окружения `/opt/brosil/venv`.
+
 ## API
 
 ```text
